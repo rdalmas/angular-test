@@ -1,4 +1,4 @@
-<p-table #dt [value]="products" [rows]="10" [paginator]="true" [globalFilterFields]="['productName','productID','salesQ1','salesQ2','salesQ3','salesQ4']"
+<p-table #dt [columns]="cols" [value]="products" [rows]="10" [paginator]="true" [globalFilterFields]="['productName','productID','salesQ1','salesQ2','salesQ3','salesQ4']"
     [(selection)]="selectedProducts" [rowHover]="true" dataKey="id"
     currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [showCurrentPageReport]="true">
     <ng-template pTemplate="caption">
@@ -10,18 +10,17 @@
             </span>
         </div>
     </ng-template>
-    <ng-template pTemplate="header">
+    <ng-template pTemplate="header" let-columns>
         <tr>
             <th style="width: 3rem">
                 <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
             </th>
-            <th pSortableColumn="productID">Product ID<p-sortIcon field="productID"></p-sortIcon></th>
-            <th pSortableColumn="productName">Name<p-sortIcon field="productName"></p-sortIcon></th>
-            <th pSortableColumn="salesQ1">2019Q1<p-sortIcon field="salesQ1"></p-sortIcon></th>
-            <th pSortableColumn="salesQ2">2019Q2<p-sortIcon field="salesQ2"></p-sortIcon></th>
-            <th pSortableColumn="salesQ3">2019Q3<p-sortIcon field="salesQ3"></p-sortIcon></th>
-            <th pSortableColumn="salesQ4">2019Q4<p-sortIcon field="salesQ4"></p-sortIcon></th>
-            <th pSortableColumn="totalSales">Total Sales <p-sortIcon field="totalSales"></p-sortIcon></th>
+            <ng-container *ngFor="let col of columns">
+                <th pSortableColumn="{{col.header}}">{{ col.header }}<p-sortIcon field="{{col.header}}"></p-sortIcon></th>
+            </ng-container>
+            <th style="width: 3rem">
+                Actions
+            </th>
         </tr>
     </ng-template>
     <ng-template pTemplate="body" let-product>
@@ -58,22 +57,22 @@
         </div>
         <div class="p-field">
             <label for="salesQ1">2019Q1</label>
-            <textarea id="salesQ1" pInputTextarea [(ngModel)]="product.salesQ1" required rows="3" cols="20"></textarea>
+            <p-inputNumber mode="currency" currency="USD" id="salesQ1" [(ngModel)]="product.salesQ1" required />
         </div>
 
         <div class="p-field">
             <label for="salesQ2">2019Q2</label>
-            <textarea id="salesQ2" pInputTextarea [(ngModel)]="product.salesQ2" required rows="3" cols="20"></textarea>
+            <p-inputNumber mode="currency" currency="USD" id="salesQ2" [(ngModel)]="product.salesQ2" required />
         </div>
 
         <div class="p-field">
             <label for="salesQ3">2019Q3</label>
-            <textarea id="salesQ3" pInputTextarea [(ngModel)]="product.salesQ3" required rows="3" cols="20"></textarea>
+            <p-inputNumber mode="currency" currency="USD" id="salesQ3" [(ngModel)]="product.salesQ3" required />
         </div>
 
         <div class="p-field">
             <label for="salesQ4">2019Q4</label>
-            <textarea id="salesQ4" pInputTextarea [(ngModel)]="product.salesQ4" required rows="3" cols="20"></textarea>
+            <p-inputNumber mode="currency" currency="USD" id="salesQ4" [(ngModel)]="product.salesQ4" required />
         </div>
         
     </ng-template>

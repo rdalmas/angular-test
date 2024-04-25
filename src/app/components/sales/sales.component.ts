@@ -11,26 +11,37 @@ import { ProductService } from '../../services/product.service';
   styleUrl: './sales.component.css',
   providers: [ProductService, ConfirmationService, MessageService]
 })
+
 export class SalesComponent implements OnInit {
   products: Product[] = [] as Product[];
   product: Product = {} as Product;
   selectedProducts: Product[] = [] as Product[];
   productDialog: boolean = false;
   submitted: boolean = false;
+  cols: any[] = [];
 
 
   constructor(private productService: ProductService, private messageService: MessageService, private confirmationService: ConfirmationService) { }
 
   ngOnInit() {
-    this.productService.getProducts().then((data) => this.products = data.map((item) => {
-      const totalSales = item.salesQ1 + item.salesQ2 + item.salesQ3 + item.salesQ4;
-      return { ...item, totalSales }
-    }));
+    this.productService.getProducts().then((data) => {
+      this.products = data.map((item) => {
+        const totalSales = this.calculateTotalSales(item);
+        return { ...item, totalSales }
+      });
+      this.cols = Object.keys(this.products[0]).map((col) => { 
+        return { header: col }
+       });
+    });
   }
 
   editProduct(product: Product) {
-    this.product = {...product};
+    this.product = product;
     this.productDialog = true;
+  }
+
+  calculateTotalSales(item: Product) {
+    return Number(item.salesQ1) + Number(item.salesQ2) + Number(item.salesQ3) + Number(item.salesQ4);
   }
 
   hideDialog() {
@@ -90,13 +101,13 @@ export class SalesComponent implements OnInit {
 
     if (this.product.productName.trim()) {
         if (this.product.productID) {
-            this.products[this.findIndexById(this.product.productID)] = this.product;                
-            this.messageService.add({severity:'success', summary: 'Successful', detail: 'Product Updated', life: 3000});
+          this.products[this.findIndexById(this.product.productID)] = {...this.product, totalSales: this.calculateTotalSales(this.product)};                
+          this.messageService.add({severity:'success', detail: 'Product Updated', life: 3000});
         }
         else {
-            this.product.productID = this.createId();
-            this.products.push(this.product);
-            this.messageService.add({severity:'success', summary: 'Successful', detail: 'Product Created', life: 3000});
+          this.product.productID = this.createId();
+          this.products.push(this.product);
+          this.messageService.add({severity:'success', detail: 'Product Created', life: 3000});
         }
 
         this.products = [...this.products];
