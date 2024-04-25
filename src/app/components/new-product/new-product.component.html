@@ -1,31 +1,31 @@
-<div class="flex align-items-center justify-content-center h-screen">
-    <p-card header="Add Product" subheader="">
+<div class="main flex align-items-center justify-content-center h-screen">
+    <p-card class="card-container" header="Add Product" subheader="">
         <form [formGroup]="prodForm" id="prodForm" (ngSubmit)="onSubmit()">
-            <div class="flex">
-                <span class="p-input-icon-left my-2">
+            <div class="field-container">
+                <span class="p-input-icon-left my-2 field-space">
                     <i class="pi pi-file-edit"></i>
-                    <input id="productName" formControlName="productName" type="text" pInputText placeholder="Product Name">
+                    <input id="productName" maxlength="50" formControlName="productName" type="text" pInputText placeholder="Product Name">
                 </span>
                 <div *ngIf="submitted && f['productName'].errors" class="flex align-items-center justify-content-end">
                     <small *ngIf="f['productName'].errors['required']" id="product-name-help" class="p-error block flex align-items-center justify-content-end">
                         Product Name is required.
                     </small>
                 </div>
-                <span class="p-input-icon-left my-2">
+                <span class="p-input-icon-left my-2 field-space">
                     <i class="pi pi-tag"></i>
-                    <input id="productID" formControlName="productID" type="text" pInputText placeholder="Product ID">
+                    <input id="productID" maxlength="13" formControlName="productID" type="text" pInputText placeholder="Product ID">
                 </span>
                 <div *ngIf="submitted && f['productID'].errors" class="flex align-items-center justify-content-end">
                     <small *ngIf="f['productID'].errors['required']" id="product-id-help" class="p-error block flex align-items-center justify-content-end">
                         Product ID is required.
                     </small>
                 </div>
-                <span class="p-input-icon-left my-2">
+                <span class="p-input-icon-left my-2 field-space">
                     <i class="pi pi-user"></i>
-                    <input id="productManager" formControlName="productManager" type="text" pInputText placeholder="Product Manager">
+                    <input id="productManager" maxlength="30" formControlName="productManager" type="text" pInputText placeholder="Product Manager">
                 </span>
-                <span class="p-input-icon-left my-2">
-                    <p-calendar [showIcon]="true" id="salesStartDate" formControlName="salesStartDate"></p-calendar>
+                <span class="p-input-icon-left my-2 field-space">
+                    <p-calendar [showIcon]="true" maxlength="10" id="salesStartDate" formControlName="salesStartDate"></p-calendar>
                 </span>
                 <div *ngIf="submitted && f['salesStartDate'].errors" class="flex align-items-center justify-content-end">
                     <small *ngIf="f['salesStartDate'].errors['required']" id="sales-start-date-help" class="p-error block flex align-items-center justify-content-end">
@@ -37,7 +37,7 @@
         <p-divider></p-divider>
         <ng-template pTemplate="footer">
             <div class="flex align-items-center justify-content-center">
-                <button (click)="resetForm()" pButton label="Clear"></button>
+                <button class="button-space" (click)="resetForm()" pButton label="Clear"></button>
                 <button pButton type="submit" form="prodForm" label="Submit" [loading]="loading"></button>
             </div>
         </ng-template>

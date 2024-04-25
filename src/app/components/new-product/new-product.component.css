@@ -1,0 +1,26 @@
+.field-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+::ng-deep .p-card-body .p-card-title, 
+::ng-deep .p-card-body .p-card-footer {
+    display: flex;
+    justify-content: center;
+}
+
+.main {
+    height: 100%;
+    width: 100%;
+    padding: 20px;
+}
+
+.button-space {
+    margin-right: 10px;
+}
+
+.field-space {
+    margin-top: 20px;
+}

@@ -1,86 +1,88 @@
-<p-table #dt [columns]="cols" [value]="products" [rows]="10" [paginator]="true" [globalFilterFields]="['productName','productID','salesQ1','salesQ2','salesQ3','salesQ4']"
-    [(selection)]="selectedProducts" [rowHover]="true" dataKey="id"
-    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [showCurrentPageReport]="true">
-    <ng-template pTemplate="caption">
-        <div class="flex align-items-center justify-content-between">
-            <h2 class="m-0">Sales</h2>
-            <span class="p-input-icon-left">
-                <i class="pi pi-search"></i>
-                <input pInputText type="text" (input)="dt.filterGlobal($any($event.target).value, 'contains')" placeholder="Search..." />
-            </span>
-        </div>
-    </ng-template>
-    <ng-template pTemplate="header" let-columns>
-        <tr>
-            <th style="width: 3rem">
-                <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
-            </th>
-            <ng-container *ngFor="let col of columns">
-                <th pSortableColumn="{{col.header}}">{{ col.header }}<p-sortIcon field="{{col.header}}"></p-sortIcon></th>
-            </ng-container>
-            <th style="width: 3rem">
-                Actions
-            </th>
-        </tr>
-    </ng-template>
-    <ng-template pTemplate="body" let-product>
-        <tr>
-            <td>
-                <p-tableCheckbox [value]="product"></p-tableCheckbox>
-            </td>
-            <td>{{product.productID}}</td>
-            <td>{{product.productName}}</td>
-            <td>{{product.salesQ1 | currency:'USD'}}</td>
-            <td>{{product.salesQ2 | currency:'USD'}}</td>
-            <td>{{product.salesQ3 | currency:'USD'}}</td>
-            <td>{{product.salesQ4 | currency:'USD'}}</td>
-            <td>{{product.totalSales | currency:'USD'}}</td>
-            <td>
-                <button label="Edit" pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success mr-2" (click)="editProduct(product)"></button>
-                <button label="Delete" pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning" (click)="deleteProduct(product)"></button>
-            </td>
-        </tr>
-    </ng-template>
-    <ng-template pTemplate="summary">
-        <div class="flex align-items-center justify-content-between">
-            In total there are {{products ? products.length : 0 }} products.
-        </div>
-    </ng-template>
-</p-table>
-
-<p-dialog [(visible)]="productDialog" [style]="{width: '450px'}" header="Product Details" [modal]="true" styleClass="p-fluid">
-    <ng-template pTemplate="content">
-        <div class="p-field">
-            <label for="name">Name</label>
-            <input type="text" pInputText id="productName" [(ngModel)]="product.productName" required autofocus />
-            <small class="p-error" *ngIf="submitted && !product.productName">Name is required.</small>
-        </div>
-        <div class="p-field">
-            <label for="salesQ1">2019Q1</label>
-            <p-inputNumber mode="currency" currency="USD" id="salesQ1" [(ngModel)]="product.salesQ1" required />
-        </div>
-
-        <div class="p-field">
-            <label for="salesQ2">2019Q2</label>
-            <p-inputNumber mode="currency" currency="USD" id="salesQ2" [(ngModel)]="product.salesQ2" required />
-        </div>
-
-        <div class="p-field">
-            <label for="salesQ3">2019Q3</label>
-            <p-inputNumber mode="currency" currency="USD" id="salesQ3" [(ngModel)]="product.salesQ3" required />
-        </div>
-
-        <div class="p-field">
-            <label for="salesQ4">2019Q4</label>
-            <p-inputNumber mode="currency" currency="USD" id="salesQ4" [(ngModel)]="product.salesQ4" required />
-        </div>
-        
-    </ng-template>
-
-    <ng-template pTemplate="footer">
-        <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text" (click)="hideDialog()"></button>
-        <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text" (click)="saveProduct()"></button>
-    </ng-template>
-</p-dialog>
-
-<p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>
+<div class="table-container">
+    <p-table #dt [columns]="cols" [value]="products" [rows]="10" [paginator]="true" [globalFilterFields]="['productName','productID','salesQ1','salesQ2','salesQ3','salesQ4']"
+        [(selection)]="selectedProducts" [rowHover]="true" dataKey="id"
+        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [showCurrentPageReport]="true">
+        <ng-template pTemplate="caption">
+            <div class="flex align-items-center justify-content-between">
+                <h2 class="m-0">Sales</h2>
+                <span class="p-input-icon-left">
+                    <i class="pi pi-search"></i>
+                    <input pInputText type="text" (input)="dt.filterGlobal($any($event.target).value, 'contains')" placeholder="Search..." />
+                </span>
+            </div>
+        </ng-template>
+        <ng-template pTemplate="header" let-columns>
+            <tr>
+                <th style="width: 3rem">
+                    <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                </th>
+                <ng-container *ngFor="let col of columns">
+                    <th pSortableColumn="{{col.header}}">{{ col.header }}<p-sortIcon field="{{col.header}}"></p-sortIcon></th>
+                </ng-container>
+                <th style="width: 3rem">
+                    Actions
+                </th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-product>
+            <tr>
+                <td>
+                    <p-tableCheckbox [value]="product"></p-tableCheckbox>
+                </td>
+                <td>{{product.productID}}</td>
+                <td>{{product.productName}}</td>
+                <td>{{product.salesQ1 | currency:'USD'}}</td>
+                <td>{{product.salesQ2 | currency:'USD'}}</td>
+                <td>{{product.salesQ3 | currency:'USD'}}</td>
+                <td>{{product.salesQ4 | currency:'USD'}}</td>
+                <td>{{product.totalSales | currency:'USD'}}</td>
+                <td>
+                    <button label="Edit" pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success mr-2" (click)="editProduct(product)"></button>
+                    <button label="Delete" pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning" (click)="deleteProduct(product)"></button>
+                </td>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="summary">
+            <div class="flex align-items-center justify-content-between">
+                In total there are {{products ? products.length : 0 }} products.
+            </div>
+        </ng-template>
+    </p-table>
+    
+    <p-dialog [(visible)]="productDialog" [style]="{width: '450px'}" header="Product Details" [modal]="true" styleClass="p-fluid">
+        <ng-template pTemplate="content">
+            <div class="p-field">
+                <label for="name">Name</label>
+                <input type="text" pInputText id="productName" [(ngModel)]="product.productName" required autofocus />
+                <small class="p-error" *ngIf="submitted && !product.productName">Name is required.</small>
+            </div>
+            <div class="p-field">
+                <label for="salesQ1">2019Q1</label>
+                <p-inputNumber mode="currency" currency="USD" id="salesQ1" [(ngModel)]="product.salesQ1" required />
+            </div>
+    
+            <div class="p-field">
+                <label for="salesQ2">2019Q2</label>
+                <p-inputNumber mode="currency" currency="USD" id="salesQ2" [(ngModel)]="product.salesQ2" required />
+            </div>
+    
+            <div class="p-field">
+                <label for="salesQ3">2019Q3</label>
+                <p-inputNumber mode="currency" currency="USD" id="salesQ3" [(ngModel)]="product.salesQ3" required />
+            </div>
+    
+            <div class="p-field">
+                <label for="salesQ4">2019Q4</label>
+                <p-inputNumber mode="currency" currency="USD" id="salesQ4" [(ngModel)]="product.salesQ4" required />
+            </div>
+            
+        </ng-template>
+    
+        <ng-template pTemplate="footer">
+            <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text" (click)="hideDialog()"></button>
+            <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text" (click)="saveProduct()"></button>
+        </ng-template>
+    </p-dialog>
+    
+    <p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>
+</div>

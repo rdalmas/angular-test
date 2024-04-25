@@ -24,10 +24,10 @@ import { PrimengModule } from './primeng.module';
     AppComponent,
     LoginComponent,
     NewProductComponent,
-    SalesComponent,
-    WelcomeComponent
+    SalesComponent
   ],
   imports: [
+    WelcomeComponent,
     PrimengModule,
     BrowserModule,
     BrowserAnimationsModule,
