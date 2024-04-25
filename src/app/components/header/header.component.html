@@ -1,24 +1,17 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="container-fluid">
-        <a class="navbar-brand" (click)="home()">Auth Guards Demo</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            <li class="nav-item">
-            <a class="nav-link active" aria-current="page" routerLink="/login">Login</a>
-            </li>
-            <li class="nav-item">
-            <a class="nav-link" routerLink="/new-product">New Product</a>
-            </li>
-            <li class="nav-item">
-            <a class="nav-link" routerLink="/sales">Sales</a>
-            </li>
-            <li class="nav-item">
-            <a class="nav-link" (click)="logout()">Logout</a>
-            </li>
-        </ul>
+<p-toolbar styleClass="bg-gray-900 shadow-2" [style]="{ 'border-radius': '3rem', 'background-image': 'linear-gradient(to right, var(--bluegray-500), var(--bluegray-800))' }">
+    <ng-template pTemplate="start">
+        <p-button (click)="sidebarVisible = true" icon="pi pi-bars"></p-button>
+    </ng-template>
+    <ng-template pTemplate="center">
+        <h3>Sales System</h3>
+    </ng-template>
+    <ng-template pTemplate="end">
+        <div class="flex align-items-center gap-2">
+            <a (click)="logout()" rel="noopener noreferrer" class="p-button font-bold">Logout</a>
         </div>
-    </div>
-</nav>
+    </ng-template>
+</p-toolbar>
+<p-sidebar [(visible)]="sidebarVisible">
+    <h3>Pages</h3>
+    <p-menu [model]="menuItems"> </p-menu>
+</p-sidebar>

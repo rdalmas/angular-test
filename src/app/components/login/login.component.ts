@@ -43,7 +43,7 @@ export class LoginComponent {
       } else {
         this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Login Failed!' });
       }
-      this.loading = false;
     }
+    this.loading = false;
   }
 }

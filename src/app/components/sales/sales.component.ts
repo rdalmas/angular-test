@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ConfirmationService, MessageService } from 'primeng/api';
 
-
 import { Product } from '../../types/product';
 import { ProductService } from '../../services/product.service';
 
@@ -24,8 +23,21 @@ export class SalesComponent implements OnInit {
   constructor(private productService: ProductService, private messageService: MessageService, private confirmationService: ConfirmationService) { }
 
   ngOnInit() {
+    const routerState = history.state;
     this.productService.getProducts().then((data) => {
-      this.products = data.map((item) => {
+      let mergedProducts: Product[] = data;
+      if (routerState) {
+        mergedProducts.push({ 
+          productID: routerState['productID'],
+          productName: routerState['productName'],
+          salesQ1: 0,
+          salesQ2: 0,
+          salesQ3: 0,
+          salesQ4: 0,
+          totalSales: 0 
+        });
+      }
+      this.products = mergedProducts.map((item) => {
         const totalSales = this.calculateTotalSales(item);
         return { ...item, totalSales }
       });
