@@ -26,7 +26,7 @@ export class SalesComponent implements OnInit {
     const routerState = history.state;
     this.productService.getProducts().then((data) => {
       let mergedProducts: Product[] = data;
-      if (routerState) {
+      if (routerState && 'productID' in routerState) {
         mergedProducts.push({ 
           productID: routerState['productID'],
           productName: routerState['productName'],
@@ -113,8 +113,13 @@ export class SalesComponent implements OnInit {
 
     if (this.product.productName.trim()) {
         if (this.product.productID) {
-          this.products[this.findIndexById(this.product.productID)] = {...this.product, totalSales: this.calculateTotalSales(this.product)};                
-          this.messageService.add({severity:'success', detail: 'Product Updated', life: 3000});
+          if (this.product.productName && this.product.salesQ1 && this.product.salesQ2 && this.product.salesQ3 && this.product.salesQ4) {
+            this.products[this.findIndexById(this.product.productID)] = {...this.product, totalSales: this.calculateTotalSales(this.product)};
+            this.messageService.add({severity:'success', detail: 'Product Updated', life: 3000});
+          } else {
+            this.messageService.add({severity:'error', detail: 'Invalid or missing values', life: 3000});
+            return;
+          }
         }
         else {
           this.product.productID = this.createId();

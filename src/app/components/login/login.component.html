@@ -1,21 +1,22 @@
-<div class="flex align-items-center justify-content-center h-screen">
+<div class="login-container">
+    <h1>Sales System</h1>
     <p-card header="Login" subheader="">
         <form [formGroup]="loginForm" id="loginForm" (ngSubmit)="onSubmit()">
-            <div class="flex">
-                <span class="p-input-icon-left my-2">
+            <div class="login-field-container">
+                <span class="p-input-icon-left my-2 field-space">
                     <i class="pi pi-user"></i>
-                    <input id="username" formControlName="username" type="text" pInputText placeholder="Username">
+                    <input aria-label="username" id="username" formControlName="username" type="text" pInputText placeholder="Username">
                 </span>
-                <div *ngIf="submitted && f['username'].errors" class="flex align-items-center justify-content-end">
+                <div *ngIf="submitted && f['username'].errors" class="flex align-items-center justify-content-end message-space">
                     <small *ngIf="f['username'].errors['required']" id="username-help" class="p-error block flex align-items-center justify-content-end">
                         Username is required.
                     </small>
                 </div>
-                <span class="p-input-icon-left my-2">
+                <span class="p-input-icon-left my-2 field-space">
                     <i class="pi pi-key"></i>
-                    <input id="password" formControlName="password" type="password" pInputText placeholder="Password">
+                    <input aria-label="password" id="password" formControlName="password" type="password" pInputText placeholder="Password">
                 </span>
-                <div *ngIf="submitted && f['password'].errors" class="flex align-items-center justify-content-end">
+                <div *ngIf="submitted && f['password'].errors" class="flex align-items-center justify-content-end message-space">
                     <small *ngIf="f['password'].errors['required']" id="passwword-help" class="p-error block flex align-items-center justify-content-end">
                         Password is required.
                     </small>
@@ -24,9 +25,7 @@
         </form>
         <p-divider></p-divider>
         <ng-template pTemplate="footer">
-            <div class="flex align-items-center justify-content-center">
-                <button pButton type="submit" form="loginForm" label="Submit" [loading]="loading"></button>
-            </div>
+            <button pButton aria-label="login" type="submit" form="loginForm" [loading]="loading">Login</button>
         </ng-template>
     </p-card>
 </div>

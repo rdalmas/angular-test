@@ -1,7 +1,17 @@
 <div class="table-container">
-    <p-table #dt [columns]="cols" [value]="products" [rows]="10" [paginator]="true" [globalFilterFields]="['productName','productID','salesQ1','salesQ2','salesQ3','salesQ4']"
-        [(selection)]="selectedProducts" [rowHover]="true" dataKey="id"
-        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [showCurrentPageReport]="true">
+    <p-table
+        #dt 
+        [columns]="cols" 
+        [value]="products" 
+        [rows]="10" 
+        [paginator]="true" 
+        [globalFilterFields]="['productName','productID','salesQ1','salesQ2','salesQ3','salesQ4']"
+        [(selection)]="selectedProducts" 
+        [rowHover]="true" 
+        dataKey="productID"
+        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+        [showCurrentPageReport]="true"
+    >    
         <ng-template pTemplate="caption">
             <div class="flex align-items-center justify-content-between">
                 <h2 class="m-0">Sales</h2>
@@ -37,8 +47,8 @@
                 <td>{{product.salesQ4 | currency:'USD'}}</td>
                 <td>{{product.totalSales | currency:'USD'}}</td>
                 <td>
-                    <button label="Edit" pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success mr-2" (click)="editProduct(product)"></button>
-                    <button label="Delete" pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning" (click)="deleteProduct(product)"></button>
+                    <p-button pRipple icon="pi pi-pencil" severity="secondary" [rounded]="true" (click)="editProduct(product)"></p-button>
+                    <p-button pRipple icon="pi pi-trash" severity="danger" [rounded]="true" class="button-space" (click)="deleteProduct(product)"></p-button>
                 </td>
             </tr>
         </ng-template>
@@ -51,36 +61,40 @@
     
     <p-dialog [(visible)]="productDialog" [style]="{width: '450px'}" header="Product Details" [modal]="true" styleClass="p-fluid">
         <ng-template pTemplate="content">
-            <div class="p-field">
+            <div class="p-field button-space">
                 <label for="name">Name</label>
                 <input type="text" pInputText id="productName" [(ngModel)]="product.productName" required autofocus />
                 <small class="p-error" *ngIf="submitted && !product.productName">Name is required.</small>
             </div>
-            <div class="p-field">
-                <label for="salesQ1">2019Q1</label>
+            <div class="p-field button-space">
+                <label for="salesQ1">salesQ1</label>
                 <p-inputNumber mode="currency" currency="USD" id="salesQ1" [(ngModel)]="product.salesQ1" required />
+                <small class="p-error" *ngIf="submitted && !product.salesQ1">Sales Q1 is required.</small>
             </div>
     
-            <div class="p-field">
-                <label for="salesQ2">2019Q2</label>
+            <div class="p-field button-space">
+                <label for="salesQ2">salesQ2</label>
                 <p-inputNumber mode="currency" currency="USD" id="salesQ2" [(ngModel)]="product.salesQ2" required />
+                <small class="p-error" *ngIf="submitted && !product.salesQ2">Sales Q2 is required.</small>
             </div>
     
-            <div class="p-field">
-                <label for="salesQ3">2019Q3</label>
+            <div class="p-field button-space">
+                <label for="salesQ3">salesQ3</label>
                 <p-inputNumber mode="currency" currency="USD" id="salesQ3" [(ngModel)]="product.salesQ3" required />
+                <small class="p-error" *ngIf="submitted && !product.salesQ3">Sales Q3 is required.</small>
             </div>
     
-            <div class="p-field">
-                <label for="salesQ4">2019Q4</label>
+            <div class="p-field button-space">
+                <label for="salesQ4">salesQ4</label>
                 <p-inputNumber mode="currency" currency="USD" id="salesQ4" [(ngModel)]="product.salesQ4" required />
+                <small class="p-error" *ngIf="submitted && !product.salesQ4">Sales Q4 is required.</small>
             </div>
             
         </ng-template>
     
         <ng-template pTemplate="footer">
-            <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text" (click)="hideDialog()"></button>
-            <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text" (click)="saveProduct()"></button>
+            <p-button pRipple label="Cancel" icon="pi pi-times" class="p-button-text p-button" (click)="hideDialog()"></p-button>
+            <p-button pRipple label="Save" icon="pi pi-check" class="p-button-text p-button" (click)="saveProduct()"></p-button>
         </ng-template>
     </p-dialog>
     

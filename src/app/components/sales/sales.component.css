@@ -3,3 +3,11 @@
     border-radius: 2rem;
     border: 1px solid lightgray;
 }
+
+.button-space {
+    margin-top: 10px;
+}
+ 
+::ng-deep .p-dialog-footer {
+    text-align: center;
+}

@@ -1,0 +1,30 @@
+.login-container {
+    height: 100vh;
+    width: 100vw;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.login-field-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+::ng-deep .p-card-body .p-card-title, 
+::ng-deep .p-card-body .p-card-footer {
+    display: flex;
+    justify-content: center;
+}
+
+.field-space {
+    margin-top: 20px;
+}
+
+.message-space {
+    margin-top: 5px;
+}

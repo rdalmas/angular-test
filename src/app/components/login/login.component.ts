@@ -17,7 +17,6 @@ export class LoginComponent {
   submitted!: boolean;
   loading = false;
 
-
   constructor(private fb: FormBuilder, private authService : AuthService, private router: Router, private messageService: MessageService) {}
 
   ngOnInit(): void {
@@ -41,7 +40,7 @@ export class LoginComponent {
         this.messageService.add({ severity: 'success', detail: 'Login Successfull!' });
         this.router.navigate(['/welcome']);
       } else {
-        this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Login Failed!' });
+        this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Login Failed! Please check your credentials.' });
       }
     }
     this.loading = false;
