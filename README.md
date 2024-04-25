@@ -1,6 +1,26 @@
-# AngularTest
+# Sales System
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.5.
+Small SPA built using Angular 17 and PrimeNg library.
+
+## Valid credentials:
+**username: angular-test**
+**password: 123**
+
+## Routes
+
+**/login:** Login page with a simple user authentication (hardcoded). 
+
+**/welcome:** Welcome page with information regarding sidebar.
+
+**/add-product:** Page to add new products into the system.
+
+**/sales:** Page to visualise the list of product and its respective sales across the quarters of the year.
+ 
+## Future improvements
+ - [ ] Test coverage
+ - [ ] Lazy Loading for routes
+ - [ ] Connecting to a proper BE
+ - [ ] Improve accessibility
 
 ## Development server
 

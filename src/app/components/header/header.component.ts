@@ -31,7 +31,7 @@ export class HeaderComponent {
           {
             label: "Add Product",
             icon: "pi pi-plus-circle",
-            url: "/new-product"
+            url: "/add-product"
           },
           {
             label: "Sales Report",

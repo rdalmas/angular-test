@@ -6,11 +6,11 @@ import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-new-product',
-  templateUrl: './new-product.component.html',
-  styleUrl: './new-product.component.css',
+  templateUrl: './add-product.component.html',
+  styleUrl: './add-product.component.css',
   providers: [MessageService]
 })
-export class NewProductComponent {
+export class AddProductComponent {
   error = '';
   prodForm!: FormGroup;
   submitted!: boolean;

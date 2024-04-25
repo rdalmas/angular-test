@@ -5,7 +5,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
-import { NewProductComponent } from './components/new-product/new-product.component';
+import { AddProductComponent } from './components/add-product/add-product.component';
 import { SalesComponent } from './components/sales/sales.component';
 import { WelcomeComponent } from './components/welcome/welcome.component';
 import { HeaderComponent } from './components/header/header.component';
@@ -23,7 +23,7 @@ import { PrimengModule } from './primeng.module';
     HeaderComponent,
     AppComponent,
     LoginComponent,
-    NewProductComponent,
+    AddProductComponent,
     SalesComponent
   ],
   imports: [
